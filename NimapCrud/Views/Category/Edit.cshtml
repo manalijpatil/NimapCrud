@@ -1,0 +1,16 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model Category
+@{
+}
+<h3 class="text-center">Edit Category</h3>
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="CategoryId" />
+    <div class="form-group mb-3">
+        <label asp-for="CategoryName" class="control-label"></label>
+        <input asp-for="CategoryName" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-info mt-3">Update</button>
+    <a asp-action="Index" class="btn btn-secondary mt-3">Back to List</a>
+</form>

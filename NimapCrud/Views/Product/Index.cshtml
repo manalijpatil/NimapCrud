@@ -1,0 +1,62 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model List<NimapCrud.Models.Product>
+@{
+}
+<h3 class="text-center">Product List</h3>
+@{
+    Pager pager = new Pager();
+    int pageNo = 0;
+
+    if (ViewBag.Pager != null)
+    {
+
+        pager = ViewBag.Pager;
+        pageNo = pager.CurrentPage;
+
+    }
+}
+<div class="container">
+    @if (pager.TotalPages > 0)
+    {
+        <ul class="pagination justify-content-end">
+            @for(var pg = pager.StartPage; pg <= pager.EndPage; pg++)
+            {
+                <li class="page-item @(pg==pager.CurrentPage?"active":"")">
+                    <a class="page-link" asp-controller="Product" asp-action="Index" asp-route-pg="@pg">@pg</a>
+                </li>
+            }
+        </ul>
+    }
+</div>
+<p class="text-center">
+    <a class="btn btn-primary" href="@Url.Action("Create","Product")">Add Product</a>
+</p>
+<table class="table table-bordered text-center">
+    <thead>
+        <tr>
+            <th>Product ID</th>
+            <th>Product Name</th>
+            <th>Category ID</th>
+            <th>Category Name</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model)
+        {
+            <tr>
+                <td>@product.ProductId</td>
+                <td>@product.ProductName</td>
+                <td>@product.CategoryId</td>
+                <td>@product.CategoryName</td>
+                <td>
+                    <a class="btn btn-success" href="@Url.Action("Edit","Product", new{id= product.ProductId})">Edit</a>|
+                    <a class="btn btn-info" href="@Url.Action("Details","Product", new{id= product.ProductId})">Details</a>|
+                    <a class="btn btn-danger" href="@Url.Action("Delete","Product", new{id= product.ProductId})">Delete</a>|
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
