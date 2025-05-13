@@ -79,7 +79,7 @@ namespace NimapCrud.Controllers
         }
         public IActionResult Delete(int id)
         {
-            var res =categorydb.DeleteCategory(id);
+            var res =categorydb.GetCategoryById(id);
             return View(res);
         }
 
@@ -104,10 +104,10 @@ namespace NimapCrud.Controllers
             }
             catch (Exception ex)
             {
-                ViewBag.ErroMsg = ex.Message;
-
+                ViewBag.ErrorMsg = ex.Message;
+                var category = categorydb.GetCategoryById(id);
+                 return View(category);
             }
-            return View();
         }
     }
 }

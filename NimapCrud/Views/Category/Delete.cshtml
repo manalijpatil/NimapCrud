@@ -16,7 +16,7 @@
         <td>@Model.CategoryName</td>
     </tr>
 </table>
-<form asp-action="Delete">
+<form asp-action="Delete" method="post" asp-route-id="@Model.CategoryId">
     <input type="submit" value="Delete" class="btn btn-danger" />|
     <a asp-action="Index" class="btn btn-secondary">Back To List</a>
 </form>
