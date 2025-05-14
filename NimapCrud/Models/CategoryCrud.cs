@@ -80,22 +80,12 @@ namespace NimapCrud.Models
             return result;
         }
         //Delete category
-        //public int DeleteCategory(int categoryid)
-        //{
-        //    int result = 0;
-        //    string qry = "delete from Category where categoryid=@categoryid";
-        //    cmd= new SqlCommand(qry,con);
-        //    cmd.Parameters.AddWithValue("@categoryid", categoryid);
-        //    con.Open();
-        //    result= cmd.ExecuteNonQuery();
-        //    con.Close();
-        //    return result;
-        //}
+        // A trigger has been created on the Category table(database) to automatically
+        // delete all products associated with a category
+        // when the category is deleted.
         public int DeleteCategory(int categoryid)
         {
             int result = 0;
-
-            //delete products related to category
             string qry = @"
                     delete from Product where categoryid=@categoryid;
                     delete from Category where categoryid=@categoryid";
